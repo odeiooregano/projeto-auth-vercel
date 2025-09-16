@@ -1,16 +1,18 @@
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #121212; /* Fundo escuro */
-    color: #e0e0e0; /* Texto claro */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background-color: #121212;
+    color: #e0e0e0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    line-height: 1.6; 
 }
 
 .container {
-    background: #1e1e1e; /* Cor do card */
+    background: #1e1e1e;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
@@ -20,24 +22,33 @@ body {
 }
 
 h1, h2 {
-    color: #bb86fc; /* Tom roxo para títulos */
+    color: #bb86fc;
     margin-bottom: 1rem;
+    font-weight: 600; 
 }
 
 form {
     margin-top: 1.5rem;
     padding-top: 1rem;
+    border-top: 1px solid #2c2c2c; 
 }
 
 input, button {
-    width: calc(100% - 2rem);
-    padding: 0.8rem; /* Padding reduzido */
+    width: 100%; 
+    padding: 0.8rem;
     margin: 0.5rem 0;
     border: 1px solid #333;
     border-radius: 8px;
     box-sizing: border-box;
     background-color: #2c2c2c;
     color: #e0e0e0;
+    transition: all 0.3s ease; 
+}
+
+input:focus {
+    border-color: #bb86fc; 
+    outline: none; 
+    box-shadow: 0 0 5px rgba(187, 134, 252, 0.5); 
 }
 
 button {
@@ -57,28 +68,30 @@ button:hover {
     padding: 0.75rem;
     margin-bottom: 1rem;
     border-radius: 8px;
+    font-weight: 500;
 }
 
 .message.success {
-    background-color: #4CAF5033; /* Fundo verde com transparência */
-    color: #4CAF50; /* Texto verde */
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
 }
 
 .message.error {
-    background-color: #F4433633; /* Fundo vermelho com transparência */
-    color: #F44336; /* Texto vermelho */
+    background-color: rgba(244, 67, 54, 0.2);
+    color: #F44336;
 }
 
 .message:empty {
     display: none;
 }
 
-/* Adicione estas classes */
+
 .danger-btn {
-    background-color: #cf6679; /* Cor vermelha para botão de perigo */
+    background-color: #cf6679;
     color: #fff;
     border: none;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .danger-btn:hover {
@@ -86,9 +99,9 @@ button:hover {
 }
 
 .modal {
-    display: none; /* Esconde o modal por padrão */
+    display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 100; 
     left: 0;
     top: 0;
     width: 100%;
@@ -107,6 +120,7 @@ button:hover {
     max-width: 400px;
     text-align: center;
     position: relative;
+    animation: fadeIn 0.3s ease-out; 
 }
 
 .close-btn {
@@ -123,4 +137,16 @@ button:hover {
 .close-btn:focus {
     color: #bb86fc;
     text-decoration: none;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

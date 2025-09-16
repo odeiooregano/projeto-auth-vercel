@@ -42,9 +42,14 @@ loginForm.addEventListener('submit', async (e) => {
     });
 
     const data = await res.json();
-    if (res.ok) { // res.ok verifica status 200-299
-        // Redireciona para a página de sucesso, passando o nome do usuário como parâmetro
-        window.location.href = `success.html?user=${data.username}`;
+    if (res.ok) {
+        showMessage(data.message, false);
+        // Salva o token no localStorage
+        localStorage.setItem('authToken', data.token); 
+        // Salva o nome de usuário (opcional, mas útil)
+        localStorage.setItem('username', data.username);
+        // Redireciona para o painel
+        window.location.href = 'dashboard.html';
     } else {
         showMessage(data.message, true);
     }
