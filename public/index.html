@@ -32,6 +32,21 @@
             <button type="submit">Alterar Senha</button>
         </form>
     </div>
+    
+    <button id="deleteAccountBtn" class="danger-btn">Deletar Conta</button>
+
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>Confirmar Exclusão de Conta</h3>
+        <p>Tem certeza que deseja deletar sua conta? Esta ação é irreversível.</p>
+        <form id="deleteAccountForm">
+            <input type="text" id="deleteUser" placeholder="Seu Usuário" required>
+            <input type="password" id="deletePass" placeholder="Sua Senha" required>
+            <button type="submit">Deletar Minha Conta</button>
+        </form>
+    </div>
+</div>
     <script src="script.js"></script>
 </body>
 </html>

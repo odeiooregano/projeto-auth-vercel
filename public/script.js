@@ -72,3 +72,50 @@ changePasswordForm.addEventListener('submit', async (e) => {
         showMessage(data.message, true);
     }
 });
+
+// Captura elementos do modal
+const deleteAccountBtn = document.getElementById('deleteAccountBtn');
+const deleteModal = document.getElementById('deleteModal');
+const closeBtn = document.querySelector('.close-btn');
+const deleteAccountForm = document.getElementById('deleteAccountForm');
+
+// Mostra o modal quando o botão de "Deletar Conta" é clicado
+deleteAccountBtn.addEventListener('click', () => {
+    deleteModal.style.display = 'flex';
+});
+
+// Esconde o modal quando o botão de fechar é clicado
+closeBtn.addEventListener('click', () => {
+    deleteModal.style.display = 'none';
+});
+
+// Esconde o modal ao clicar fora dele
+window.addEventListener('click', (event) => {
+    if (event.target === deleteModal) {
+        deleteModal.style.display = 'none';
+    }
+});
+
+// Adiciona a lógica para o formulário de exclusão dentro do modal
+deleteAccountForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('deleteUser').value;
+    const password = document.getElementById('deletePass').value;
+
+    const res = await fetch('/api/delete-account', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+        showMessage(data.message, false);
+        deleteAccountForm.reset();
+        deleteModal.style.display = 'none';
+        // Opcional: Redirecionar para a página de login ou para a página inicial
+        // window.location.href = 'index.html'; 
+    } else {
+        showMessage(data.message, true);
+    }
+});
