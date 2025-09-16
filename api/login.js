@@ -32,8 +32,19 @@ module.exports = async (req, res) => {
       const passwordMatch = await bcrypt.compare(password, user.password_hash);
 
       if (passwordMatch) {
-        res.status(200).json({ message: 'Login bem-sucedido!', username: username });
-      } else {
+        // Gera um token seguro
+        const token = crypto.randomBytes(32).toString('hex');
+        
+        // Salva o token no banco de dados para o usuário logado
+        await pool.query('UPDATE users SET token = $1 WHERE username = $2', [token, username]);
+
+        // Retorna o token para o frontend
+        res.status(200).json({ 
+          message: 'Login bem-sucedido!', 
+          username: username, 
+          token: token 
+        });
+     } else {
         res.status(401).json({ message: 'Senha incorreta.' });
       }
     } catch (err) {
