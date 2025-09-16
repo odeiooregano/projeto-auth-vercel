@@ -49,3 +49,26 @@ loginForm.addEventListener('submit', async (e) => {
         showMessage(data.message, true);
     }
 });
+
+const changePasswordForm = document.getElementById('changePasswordForm');
+
+changePasswordForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('changePassUser').value;
+    const currentPassword = document.getElementById('currentPass').value;
+    const newPassword = document.getElementById('newPass').value;
+
+    const res = await fetch('/api/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, currentPassword, newPassword })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+        showMessage(data.message, false);
+        changePasswordForm.reset();
+    } else {
+        showMessage(data.message, true);
+    }
+});
